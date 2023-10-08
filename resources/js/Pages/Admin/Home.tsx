@@ -7,14 +7,28 @@ import StatusCard from "@/Components/StatusCard";
 
 import { PageProps, User } from "@/types";
 
-const Home = ({ auth, users }: { auth: PageProps; users: User[] }) => {
-    console.log(users);
-
+const Home = ({
+    auth,
+    users,
+    roles,
+    permissions,
+}: {
+    auth: PageProps;
+    users: User[];
+    roles: [];
+    permissions: [];
+}) => {
     return (
         <AuthenticatedLayout>
-            <Head title="Dashboard" />
+            <Head>
+                <title>Dashboard</title>
+                <meta
+                    name="dashboard"
+                    content="This is the dashboard page of your application."
+                />
+            </Head>
 
-            <section className="grid gap-4 md:grid-cols-2">
+            <section className="grid gap-4 md:grid-cols-2 px-4 lg:px-0">
                 <StatusCard
                     title="Total Alumni"
                     data={20000}
@@ -28,7 +42,11 @@ const Home = ({ auth, users }: { auth: PageProps; users: User[] }) => {
                     icon={<PersonIcon />}
                 />
             </section>
-            <HorizontalScrollbar />
+            <HorizontalScrollbar
+                users={users}
+                roles={roles}
+                permissions={permissions}
+            />
         </AuthenticatedLayout>
     );
 };

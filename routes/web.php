@@ -1,7 +1,11 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -23,9 +27,18 @@ Route::get('/', function () {
     ]);
 });
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::group(['middleware' => ['role:superadmin']], function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::post('/admin', [AdminController::class, 'store'])->name('admin.store');
+    
+    Route::resource('/admin/roles', RoleController::class);
+    Route::resource('/users', UserController::class);
+});
+
+
+Route::group(['middleware' => ['auth', 'role:superadmin|user']],function () {
+    Route::resource('/payments', PaymentController::class);
+    Route::resource('/permissions', PermissionController::class);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

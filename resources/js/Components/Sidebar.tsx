@@ -1,17 +1,30 @@
 import { Fragment } from "react";
-import { FileTextIcon, GlobeIcon, LayersIcon } from "@radix-ui/react-icons";
+import { PersonIcon, GearIcon, LayersIcon } from "@radix-ui/react-icons";
 
-import { Button } from "./ui/button";
+import { Link } from "@inertiajs/react";
 
 const Sidebar = () => {
     const admin = [
-        { heading: "Pendaftaran" },
-        { text: "Daftar pendaftar", icon: <GlobeIcon /> },
-        { text: "Proses pembayaran", icon: <LayersIcon /> },
-        { heading: "Pengguna" },
+        { heading: "Main" },
+
         {
-            text: "Laporan",
-            icon: <FileTextIcon />,
+            text: "Dashboard",
+            path: "/admin",
+            icon: <LayersIcon />,
+        },
+
+        {
+            text: "Users",
+            path: "/users",
+            icon: <PersonIcon />,
+        },
+
+        { heading: "Settings" },
+
+        {
+            text: "Profile",
+            path: "/profile",
+            icon: <GearIcon />,
         },
     ];
 
@@ -26,13 +39,13 @@ const Sidebar = () => {
                             </h3>
                         ) : (
                             <div className="flex flex-col">
-                                <Button
-                                    className="mb-2 h-9 justify-start gap-3 px-3"
-                                    variant="ghost"
+                                <Link
+                                    href={item.path}
+                                    className="mb-2 h-9 justify-start gap-3 px-3 inline-flex items-center"
                                 >
                                     {item.icon}
                                     <span>{item.text}</span>
-                                </Button>
+                                </Link>
                             </div>
                         )}
                     </Fragment>

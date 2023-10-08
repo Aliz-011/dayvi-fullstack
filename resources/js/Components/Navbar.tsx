@@ -18,21 +18,21 @@ const Navbar = () => {
     const user: User = auth.user as User;
 
     return (
-        <header>
-            <nav className="bg-white h-16 border-gray-200 px-4 py-2.5 lg:px-6 dark:bg-gray-800">
+        <header className="sticky top-0 z-20 bg-background/80 backdrop-blur border-b">
+            <nav className="h-16 px-4 py-2.5 lg:px-6">
                 <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                     <Link href="/" className="flex items-center">
-                        <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+                        <span className="self-center text-xl font-semibold whitespace-nowrap ">
                             Logo
                         </span>
                     </Link>
                     <div className="flex items-center lg:order-2">
-                        {user.email ? (
+                        {user && user.email ? (
                             <div className="flex items-center gap-x-4 sm:gap-x-8">
                                 {user.roles.includes("superadmin") && (
                                     <Link
                                         href="/admin"
-                                        className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                                        className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0"
                                     >
                                         Dashboard
                                     </Link>
@@ -51,7 +51,10 @@ const Navbar = () => {
                                         <DropdownMenuSeparator />
                                         <DropdownMenuGroup>
                                             <DropdownMenuItem>
-                                                <Link href="/profile">
+                                                <Link
+                                                    className="w-full text-left"
+                                                    href="/profile"
+                                                >
                                                     Profile
                                                 </Link>
                                                 <DropdownMenuShortcut>
@@ -63,6 +66,7 @@ const Navbar = () => {
                                         <DropdownMenuSeparator />
                                         <DropdownMenuItem>
                                             <Link
+                                                className="w-full text-left"
                                                 href={route("logout")}
                                                 method="post"
                                                 as="button"
@@ -79,7 +83,7 @@ const Navbar = () => {
                         ) : (
                             <Link
                                 href="/login"
-                                className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
+                                className="text-gray-800  hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2"
                             >
                                 Log in
                             </Link>
@@ -95,7 +99,7 @@ const Navbar = () => {
                             <li>
                                 <a
                                     href="#"
-                                    className="block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white"
+                                    className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0"
                                     aria-current="page"
                                 >
                                     Home
@@ -104,7 +108,7 @@ const Navbar = () => {
                             <li>
                                 <a
                                     href="#"
-                                    className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                                    className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0"
                                 >
                                     Company
                                 </a>
@@ -112,7 +116,7 @@ const Navbar = () => {
                             <li>
                                 <a
                                     href="#"
-                                    className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                                    className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0"
                                 >
                                     Marketplace
                                 </a>
@@ -120,7 +124,7 @@ const Navbar = () => {
                             <li>
                                 <a
                                     href="#"
-                                    className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                                    className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0"
                                 >
                                     Features
                                 </a>
@@ -128,7 +132,7 @@ const Navbar = () => {
                             <li>
                                 <a
                                     href="#"
-                                    className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                                    className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0"
                                 >
                                     Team
                                 </a>
@@ -136,7 +140,7 @@ const Navbar = () => {
                             <li>
                                 <a
                                     href="#"
-                                    className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                                    className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0"
                                 >
                                     Contact
                                 </a>

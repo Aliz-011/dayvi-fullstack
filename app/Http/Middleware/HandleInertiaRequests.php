@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\User;
+use App\Http\Resources\UserSharedResource;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
@@ -34,18 +34,15 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'auth.user' => fn () => $request->user() 
-                ? $request->user()->only('id', 'name', 'email') 
-                : null,
-            'auth.user.roles' => fn () => $request->user() 
-                ? $request->user()->getRoleNames() 
-                : null,
-            'auth.user.permissions' => fn () => $request->user() 
-                ? $request->user()->getPermissionNames() 
+                ? new UserSharedResource($request->user())
                 : null,
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
+            'flash' => [
+                'snapToken' => fn () => $request->session()->get('snapToken')
+            ]
         ];
     }
 }
